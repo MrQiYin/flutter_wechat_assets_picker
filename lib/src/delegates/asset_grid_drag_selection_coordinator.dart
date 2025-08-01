@@ -87,6 +87,7 @@ class AssetGridDragSelectionCoordinator {
     required BuildContext context,
     required Offset globalPosition,
     required BoxConstraints constraints,
+    Widget? specialItem,
   }) {
     if (!dragging) {
       return;
@@ -168,7 +169,7 @@ class AssetGridDragSelectionCoordinator {
       columnIndex = gridCount - columnIndex - placeholderCount - 1;
     }
 
-    final currentDragIndex = rowIndex * gridCount + columnIndex;
+    final currentDragIndex = rowIndex * gridCount + columnIndex + (specialItem != null ? -1 : 0);
 
     // Check the selecting index in order to diff unselecting assets.
     smallestSelectingIndex = math.min(

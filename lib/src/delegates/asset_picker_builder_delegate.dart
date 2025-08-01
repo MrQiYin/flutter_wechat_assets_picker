@@ -1390,14 +1390,6 @@ class DefaultAssetPickerBuilderDelegate
                     !isSingleAssetMode) {
                   child = GestureDetector(
                     excludeFromSemantics: true,
-                    onHorizontalDragStart: (d) {
-                      dragSelectCoordinator.onSelectionStart(
-                        context: context,
-                        globalPosition: d.globalPosition,
-                        index: index,
-                        asset: assets[index],
-                      );
-                    },
                     onHorizontalDragUpdate: (d) {
                       dragSelectCoordinator.onSelectionUpdate(
                         context: context,
@@ -1413,11 +1405,12 @@ class DefaultAssetPickerBuilderDelegate
                       );
                     },
                     onLongPressStart: (d) {
+                      var i = specialItem != null ? index - 1 : index;
                       dragSelectCoordinator.onSelectionStart(
                         context: context,
                         globalPosition: d.globalPosition,
-                        index: index,
-                        asset: assets[index],
+                        index: i,
+                        asset: assets[i],
                       );
                     },
                     onLongPressMoveUpdate: (d) {
@@ -1432,14 +1425,6 @@ class DefaultAssetPickerBuilderDelegate
                     onLongPressEnd: (d) {
                       dragSelectCoordinator.onDragEnd(
                         globalPosition: d.globalPosition,
-                      );
-                    },
-                    onPanStart: (d) {
-                      dragSelectCoordinator.onSelectionStart(
-                        context: context,
-                        globalPosition: d.globalPosition,
-                        index: index,
-                        asset: assets[index],
                       );
                     },
                     onPanUpdate: (d) {
